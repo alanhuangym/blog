@@ -2,7 +2,7 @@
 title: Duality of Linear Programming
 date: 2017/3/15
 tags: 
-- LP
+- linear_programming
 Categories:
 - Notes
 ---

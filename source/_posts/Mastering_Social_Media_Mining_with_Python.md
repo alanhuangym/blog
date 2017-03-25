@@ -1,3 +1,14 @@
+---
+title: Mastering Social Media Mining wiht Python
+date: 2017/3/17
+tags: 
+- data_mining
+Categories:
+- Notes
+---
+
+
+
 By Marco Bonzanini
 
 

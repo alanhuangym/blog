@@ -2,7 +2,7 @@
 title: Coursera Machine Learning Notes
 date: 2017/3/15
 tags: 
-- ML
+- machine_learning
 Categories:
 - Notes
 ---
