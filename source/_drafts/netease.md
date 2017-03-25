@@ -1,11 +1,6 @@
 ---
 title: Netease Experience
 date: 2017/3/18
-tags: 
-- work
-Categories:
-- Notes
-layout: false
 ---
 
 

@@ -3,8 +3,8 @@ title: Git Tutorial
 date: 2017/3/16
 tags: 
 - git
-Categories:
-- Notes
+categories:
+- CUHK_Notes
 ---
 
 

@@ -3,8 +3,8 @@ title: Coursera Machine Learning Notes
 date: 2017/3/15
 tags: 
 - machine_learning
-Categories:
-- Notes
+categories:
+- CUHK_Notes
 ---
 
 

@@ -3,8 +3,8 @@ title: Duality of Linear Programming
 date: 2017/3/15
 tags: 
 - linear_programming
-Categories:
-- Notes
+categories:
+- CUHK_Notes
 ---
 
 
