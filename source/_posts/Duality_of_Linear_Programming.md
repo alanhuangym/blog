@@ -1,3 +1,14 @@
+---
+title: Duality of Linear Programming
+date: 2017/3/15
+tags: 
+- LP
+Categories:
+- Notes
+---
+
+
+
 Resource:
 
 **S´ebastien Lahaie, How to take the Dual of a Linear Program http://www.cs.columbia.edu/coms6998-3/lpprimer.pdf**
