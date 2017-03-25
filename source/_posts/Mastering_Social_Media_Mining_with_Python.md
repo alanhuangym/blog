@@ -9,6 +9,8 @@ Categories:
 
 
 
+Resource: [Mastering Social Media Mining wiht Python](https://marcobonzanini.com/2016/08/02/mastering-social-media-mining-with-python/)
+
 By Marco Bonzanini
 
 
