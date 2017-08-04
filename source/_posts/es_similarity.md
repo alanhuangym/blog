@@ -268,7 +268,7 @@ b,c为同义词
 - docFreq - 所有包含b或c的文档的数量
 - termFreq - 如有一次b或c出现，则算双倍次数
 - k1 & b - 不变
-- fieldLength - 不变
+- fieldLength - ~~不变~~ 经测试，目前认为是取同义词中，长度最长的为该文档长度
 - avgFieldLength - 每个b或c算双倍大小
 
 ### 8.DFS Query Then Fetch

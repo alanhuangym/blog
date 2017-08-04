@@ -1,5 +1,5 @@
 ---
-title: python练习笔记
+title: Python练习笔记
 date: 2017-07-12
 tags:
 - python
