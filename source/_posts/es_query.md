@@ -2,9 +2,9 @@
 title: ES搜索笔记
 date: 2017-08-04 10:08:20
 tags:
-- es
+- elasticsearch
 categories:
-- es
+- elasticsearch
 ---
 
 首先，了解[QUERY结构体]([Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html))的写法：
@@ -23,11 +23,11 @@ GET /_search
 }
 ```
 
-##### 2.**from 和 size 字段**
+##### 2.[**from 和 size 字段**](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-from-size.html)
 
 控制显示搜索结果的数量和页数
 
-##### 3.**sort 字段**
+##### 3.[**sort 字段**](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-sort.html)
 
 例子如下
 
@@ -53,7 +53,7 @@ GET /my_index/my_type/_search
 
 由于es的索引不是所有字段我们都需要，所以需要进行字段筛选，同时由于使用了highlight功能，所以我们可能只需要将hightlight字段筛选出来即可。（可使用正则表达式匹配字段名）
 
-##### 5.**script_fields**
+##### 5.[**script_fields**](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-script-fields.html)
 
 用于编写函数，并返回到搜索结果中
 
@@ -77,7 +77,7 @@ GET /_search
 }
 ```
 
-##### 7.rescore
+##### 7.[rescore](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-rescore.html)
 
 用于在返回的搜索结果中再次进行得分计算，并重新计算得分，可用于在搜索相关性后，在根据资讯的日期进行二次排序
 
@@ -85,7 +85,7 @@ GET /_search
 
 用于决定是全局搜索并计算得分，还是在各自的分片上进行分布式得分计算和搜索
 
-##### 9.scroll
+##### 9.[scroll](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-scroll.html)
 
 设定搜索结果的存活时间，避免重复搜索浪费资源，只用于在可以滑动搜索窗口的客户端中，如Python
 
@@ -152,7 +152,7 @@ GET /twitter/tweet/_search
 
 叶语句：
 
-几乎语句都能写成match的形式，所以使用match
+几乎语句都能写成match的形式，所以使用[match](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html)
 
 | match方法             | 是否采用 |
 | ------------------- | ---- |
@@ -164,22 +164,22 @@ GET /twitter/tweet/_search
 
 聚合语句：
 
-bool
+[bool](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-bool-query.html)
 
 匹配到越多，越高分，不同的match之间得分相加
 
-dis_max
+[dis_max](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-dis-max-query.html)
 
 是disjunctionmax 各自的match执行，然后最高分的为最终得分，通过设置tie_breaker来调参
 
-function score
+[function score](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html)
 
-参考[前文](http://pirrla.cn/2017/07/12/es_similarity/)
+参考[前文](http://pirrla.cn/2017/07/12/es_similarity/)，运用了离当前时间越近，则score更高的[衰减函数](https://www.elastic.co/guide/en/elasticsearch/reference/5.5/query-dsl-function-score-query.html#function-decay)
 
 我认为的搜索语句：
 
 ```json
-GET /windxw/_search?search_type=dfs_query_then_fetch
+GET /windxw/_search?search_type=dfs_query_then_fetch&explain
 {
   "from": 0,
   "size": 20,
@@ -193,33 +193,68 @@ GET /windxw/_search?search_type=dfs_query_then_fetch
     }
   }, 
   "query": {
-    "bool": {
+    "function_score": {
+      "query": {
+        "bool": {
       "should": [
         {"match": {
           "title": {
             "query": "uber",
-            "boost":2，
+            "boost":2,
             "operator": "and"
           }
         }},
         {"match": {
           "content": {
             "query": "uber",
-            "boost":2，
+            "boost":2,
             "operator": "and"
           }
         }},
         {"match": {
           "keywords": {
             "query": "uber",
-            "boost":1，
+            "boost":1,
             "operator": "and"
           }
         }}
-      ]，
-      "minimum_should_match": 2 
+      ],
+      "minimum_should_match": 1 
     }
+      },
+       "functions": [ 
+            {
+                    "exp": {
+                        "publishdate" : {
+                            "origin": "now",
+                            "offset": "1h",
+                            "scale" : "30d",
+                            "decay": 0.2
+                        }
+                    },
+                    "weight": 200
+                }
+        ],
+        "boost_mode": "sum"
   }
+}
 }
 ```
 
+
+
+
+
+我认为目前需要解决的问题：
+
+1.如何实现翻页（from/size，scroll，search_after）
+
+2.权衡时间与搜索匹配度的权重（通过调整boost和weight）
+
+3.是否需要用rescore参数来进行二次排序（根据时间排序）
+
+4.search_type是使用全局搜索还是分片搜索
+
+5.三个字段（title,content,keyword）之间的权重
+
+6.三个字段的match得分是使用bool相加还是dis_max取最大值
