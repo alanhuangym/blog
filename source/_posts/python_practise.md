@@ -49,3 +49,17 @@ s.getsockname()[0], s.close()) for s in [socket.socket(socket.AF_INET,
 socket.SOCK_DGRAM)]][0][1]]) if l][0][0])
 ```
 
+绝对路径
+
+```python
+os.abspath('xxx.txt')
+```
+
+从路径解析文件名
+
+```python
+os.path.basename('path')
+```
+
+### 两个同样内容的字符串指向同一个位置（用同一个位置储存）
+

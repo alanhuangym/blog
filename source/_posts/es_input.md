@@ -94,6 +94,16 @@ for page in PDFPage.create_pages(document):
                 print text
 ```
 
+可是如果内容物是中文的话，解析出来的结果是cid编码（adobe公司特有编码）
+
+
+
+同时需要解析出文档的目录：
+
+使用document.get_outlines()获取并另存为
+
+
+
 # DOC&DOCX
 
 pip install python-docx
@@ -110,7 +120,32 @@ for i in para:
     print i.text
 ```
 
-.doc好像暂时还没方法读取
+.doc（word2003之前版本）的处理方法则比较复杂
+
+Linux用户可以下载[antiword](http://www.winfield.demon.nl/#Programmer)第三方包进行直接读取。（未验证）
+
+```
+安装antiword官方站：http://www.winfield.demon.nl/
+下载地：http://www.winfield.demon.nl/linux/antiword-0.37.tar.gz
+下载完，解压，进入目录使用命令 
+make && make install
+
+#!/usr/bin/env python
+# coding:utf-8
+import subprocess
+word = "test.doc"
+output = subprocess.check_output(["antiword", word])
+print(output)
+
+作者：Jun
+链接：https://www.zhihu.com/question/56834115/answer/158115736
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+```
+
+[用LibreOffice(Ubuntu自带)直接转docx再用python-docx，蠢了点但还能用](https://www.zhihu.com/question/56834115/answer/150658178)
+
+
 
 
 
@@ -137,5 +172,5 @@ print text_runs
 
 
 
-
+xls2csv
 
