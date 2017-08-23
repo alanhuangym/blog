@@ -7,7 +7,7 @@ categories:
 - elasticsearch
 ---
 
-首先，了解[QUERY结构体]([Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html))的写法：
+首先，了解[QUERY结构体](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)的写法：
 
 ### 1.最基础的是**"Query"字段**
 
@@ -207,14 +207,14 @@ GET /windxw/_search?search_type=dfs_query_then_fetch&explain
         {"match": {
           "content": {
             "query": "uber",
-            "boost":2,
+            "boost":1,
             "operator": "and"
           }
         }},
         {"match": {
           "keywords": {
             "query": "uber",
-            "boost":1,
+            "boost":2,
             "operator": "and"
           }
         }}
