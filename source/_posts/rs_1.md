@@ -3,7 +3,7 @@ title: 推荐系统1
 date: 2017-08-21 14:56:01
 tags:
 - recommendationsystem
-catergories:
+categories:
 - recommendationsystem
 ---
 
@@ -122,7 +122,19 @@ catergories:
 
 [matrix factorization](https://datajobs.com/data-science-repo/Recommender-Systems-%5BNetflix%5D.pdf)
 
+Neighborhodd methods - 计算产品与产品之间，用户与用户之间的关系，例如某一个用户喜欢3部电影，则选择出一组用户也同时喜欢这三部作品，然后推荐这组用户最喜爱的电影作为推荐系统推荐
 
+![](http://ondsf10qe.bkt.clouddn.com/1.png)
+
+Lantent factore models - 将用户或产品的属性进行建模，数值化，然后根据用户的偏好和产品的属性的数值，去作推荐
+
+![](http://ondsf10qe.bkt.clouddn.com/2.png)
+
+[Factorization Meets the Neighborhood: a Multifaceted Collaborative Filtering Model](http://cs.rochester.edu/twiki/pub/Main/HarpSeminar/Factorization_Meets_the_Neighborhood-_a_Multifaceted_Collaborative_Filtering_Model.pdf)
+
+定义相似度：
+
+用户：
 
 
 
