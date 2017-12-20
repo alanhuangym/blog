@@ -63,3 +63,13 @@ os.path.basename('path')
 
 ### 两个同样内容的字符串指向同一个位置（用同一个位置储存）
 
+固定输出宽度
+
+```python
+import textwrap
+str = 'xxxx'
+print (textwarp.fill(str,width=50))
+```
+
+
+
