@@ -16,3 +16,10 @@ categories:
 Reference:
 
 \[1\] [Jenkins使用简易教程](http://www.jianshu.com/p/b524b151d35f)
+
+\[2\] https://testerhome.com/topics/10003
+
+\[3\] https://personal-notes.me/%E5%9F%BA%E4%BA%8E-jenkinsdocker-%E6%90%AD%E5%BB%BA%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E4%BA%A4%E4%BB%98%E6%96%B9%E6%A1%88/
+
+\[4\] https://yq.aliyun.com/articles/80459
+
