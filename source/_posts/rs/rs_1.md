@@ -1,6 +1,6 @@
 ---
 title: 推荐系统1
-date: 2017-08-21 14:56:01
+date: 2017-08-21
 tags:
 - recommendationsystem
 categories:

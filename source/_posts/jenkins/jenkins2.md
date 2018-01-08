@@ -1,5 +1,5 @@
 ---
-title: Jenkins学习笔记2-代码质量管理
+title: Jenkins学习笔记2-Sonar实现代码质量分析（提交到代码仓库后）
 date: 2017/12/19
 tags: 
 - jenkins
@@ -9,9 +9,7 @@ categories:
 
 ### 1.代码质量管理
 
-![](http://ondsf10qe.bkt.clouddn.com/jenkins1.png)
-
-此次代码质量管理的需求，是在用户将本地的代码提交到远程仓库前，进行代码质量分析。
+此次代码质量管理的需求，是在用户将本地的代码提交到远程仓库后，进行代码质量分析。
 
 此处的代码质量不单单指有无拼写错误、格式错误等，还包括代码重复率、鲁棒性、注释率等等的指标。所以单纯的syntax错误已经不能满足我们的需求，我们希望团队能够写出高效的代码。
 
@@ -128,11 +126,9 @@ sonar.jdbc.url=jdbc:mysql://localhost:3306/sonar?useUnicode=true&character    En
 
 ##### 2.3 SonarQube 简介
 
+> SonarQube是一个用于代码质量管理的开源平台（Java开发），用于管理源代码的质量，可以从七个维度检测代码质量,通过插件形式，可以支持包括Java，C#，C/C++，PHP，PL/SQL，Cobol，Web，XML，JavaScrip，Groovy等等二十几种编程语言的代码质量管理与检测。
 
 
-### 3.FindBugs
-
-### 4.PMD
 
 参考资料：
 

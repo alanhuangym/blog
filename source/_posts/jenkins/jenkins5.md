@@ -1,5 +1,5 @@
 ---
-title: Jenkins学习笔记5-官方用法pipeline
+title: Jenkins学习笔记5-官方用法pipeline(可选)
 date: 2017/12/22
 tags: 
 - jenkins

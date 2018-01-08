@@ -18,17 +18,17 @@ categories:
 ##### 1.1 什么是持续集成：
 
 持续集成是指开发者在代码的开发过程中，可以频繁的将代码部署集成到主干，并进程自动化测试 
-![image_1b4gk79111oqbf1l16qd80kqqh8q.png-73.4kB](http://static.zybuluo.com/abcdocker/141k7ufqcy5zmgjvzlsgx444/image_1b4gk79111oqbf1l16qd80kqqh8q.png)
+![](http://ondsf10qe.bkt.clouddn.com/jenkins40.png)
 
 ##### 1.2 什么是持续交付：
 
 持续交付指的是在持续集成的环境基础之上，将代码部署到预生产环境 
-![image_1b4gk7hef1v4n6ino701pruj9n97.png-133.6kB](http://static.zybuluo.com/abcdocker/z47rzhss99x3gxahr93ovn45/image_1b4gk7hef1v4n6ino701pruj9n97.png)
+![](http://ondsf10qe.bkt.clouddn.com/jenkins41.png)
 
 ##### 1.3 持续部署：
 
 在持续交付的基础上，把部署到生产环境的过程自动化，持续部署和持续交付的区别就是最终部署到生产环境是自动化的。 
-![image_1b4gk7o2t162hb71vcg1bb5p989k.png-132.2kB](http://static.zybuluo.com/abcdocker/4i4r6iwdisn4zmsmhqewxoew/image_1b4gk7o2t162hb71vcg1bb5p989k.png)
+![](http://ondsf10qe.bkt.clouddn.com/jenkins42.png)
 
 
 
@@ -59,15 +59,17 @@ Jenkins是Java编写的，所以需要安装JDK。可以去[Oracle官网](https:
 
 输入完密码之后，会提示安装建议安装的插件。
 
-![](http://static.zybuluo.com/abcdocker/2dtjyesj3ae5zmyhxmer2kl2/image_1b4gkgcvk1c641d3k1e761jn6h10ae.png)
+<font color="red">如果安装推荐失败，只能手动一个个安装，所以推荐手动删除jenkins目录，重新启动war包</font>
+
+![](http://ondsf10qe.bkt.clouddn.com/jenkins43.png)
 
 然后会提示创建一个管理员账户
 
-![](http://static.zybuluo.com/abcdocker/wkz0tuy8b3855c1q3s64vd7x/image_1b4gkkuopf351o7fltt17on13jbl.png)
+![](http://ondsf10qe.bkt.clouddn.com/jenkins44.png)
 
 创建完成则正式进入jenkins。
 
-![](http://static.zybuluo.com/abcdocker/tcz7eoamylmpjl1dekyzt6d0/image_1b4gkl8sf1o1m12b9h9q1p85hsc2.png)
+![](http://ondsf10qe.bkt.clouddn.com/jenkins45.png)
 
 **
 
@@ -81,9 +83,9 @@ macos如果遇到没有权限进入的文件夹，右键get info 然后添加权
 
 Jenkins的关闭、重启等操作，可以通过查找进程，获取pid号，然后kill进程来完成。
 
-但是更便捷的方法是，在jenkins的url中执行一些命令来操作jenkins，
+但是更便捷的方法是，在jenkins的url中执行一些命令来操作jenkins
 
-如下http://[jenkins-server]/[command] 命令可以为：
+如下`http://[jenkins-server]/[command]` 命令可以为：
 
 - `exit` 关闭 jenkins
 - `restart` 重启 jenkins
@@ -92,6 +94,26 @@ Jenkins的关闭、重启等操作，可以通过查找进程，获取pid号，�
 Jenkins的目录（例如macos在`/Users/Shared/Jenkins`）中的`Jenkins/Home/jobs`是jenkins的核心内容，包含了jenkins的项目的配置、构建日志等重要信息，对jenkins进行备份，主要备份该文件夹即可。
 
 Jenkins其实是一个开源的平台，主要的功能实现都是依靠插件完成，所以平台的设置没有太多，比较重要的是插件设置，所以我们将对使用到的具体的插件设置在后面讲述。
+
+##### 2.4 当第一次启动完成后，后续启动(MacOS)
+
+`/Users/用户/.jenkins`是程序文件夹
+
+`/Library/Application Support/Jenkins`
+
+`/Library/LaunchDaemon/jenkins`
+
+```
+取消开机启动
+$ sudo launchctl unload -w /Library/LaunchDaemons/org.jenkins-ci.plist 
+
+设置开机启动
+$ sudo launchctl load -w /Library/LaunchDaemons/org.jenkins-ci.plist 
+```
+
+
+
+
 
 ### 3.简易Python脚本启动
 
@@ -153,6 +175,10 @@ Jenkins其实是一个开源的平台，主要的功能实现都是依靠插件�
   ``JENKINS_URL`/job/simple-python/build?token=`TOKEN_NAME` or /buildWithParameters?token=`TOKEN_NAME``
 
   尾部最好加上`&cause=Cause+Text`对该次构建进行注释，方面翻查操作日志
+
+  可以在gitlab中设置，然后在每一次push时触发URL操作，进行jenkins触发
+
+  ![](http://ondsf10qe.bkt.clouddn.com/jenkins25.png)
 
 - **Build after other projects are built**
 
@@ -222,9 +248,11 @@ Jenkins其实是一个开源的平台，主要的功能实现都是依靠插件�
 
 ### 4. Jenkins的master-slave模型
 
-![](http://images.cnblogs.com/cnblogs_com/itech/build/jenkinsslavetpye.PNG)
+![](http://ondsf10qe.bkt.clouddn.com/jenkins39.png)
 
 Jenkins也有分布式的构建，模式是master-slave的模型，master主管所有的job的运行情况。slave可以设置成不同的生产环境，master分配job到slave中，实现相应的操作。
+
+
 
 Reference：
 

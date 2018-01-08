@@ -4,7 +4,7 @@ date: 2017/3/16
 tags: 
 - git
 categories:
-- CUHK_Notes
+- git
 ---
 
 

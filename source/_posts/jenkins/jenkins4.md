@@ -45,6 +45,7 @@ docker的具体操作可以查看[官方文档](https://docs.docker.com/)或者�
 **容器操作**
 
 - `docker ps`查看当前正在运行的容器，`-a`可以查看所有容器包括未运行的
+- `docker cp <containerId>:/file/path/within/container /host/path/target ` 将容器内的文件拷贝到宿主机中
 
 **本地镜像管理**
 
@@ -192,18 +193,27 @@ echo $CID
 # 停止旧的容器
 if [ "$CID" != "" ];then
   /usr/local/bin/docker stop $CID
+  # 删除旧容器
+/usr/local/bin/docker rm $CID
 fi
 
 # 启动新容器
 /usr/local/bin/docker run -p 8000:8000 -d my_nodejs
 
-# 删除旧容器
-/usr/local/bin/docker rm $CID
-# 删除旧镜像
 
+# 删除旧镜像
 ```
 
 这样就完成了一个自动化部署docker的操作。
+
+注意，这里只删除了容器，但是每一次构建都会产生新的镜像，旧镜像还在，但是名字变为了none，所以我们还需要定期删除镜像。
+
+```shell
+# 删除旧镜像
+docker images|grep none|awk '{print $3 }'|xargs docker rmi
+```
+
+
 
 ![](http://ondsf10qe.bkt.clouddn.com/jenkins15.png)
 
